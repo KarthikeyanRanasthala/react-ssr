@@ -2,7 +2,7 @@
 
 rm -rf dist
 npx tsc --project ./server
-cp -r ./server/views ./dist/views
+cp ./server/index.html ./dist/server
 
 rm -rf client-tsc-temp-dist
 npx tsc --project ./client
