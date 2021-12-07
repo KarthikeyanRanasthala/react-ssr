@@ -1,6 +1,7 @@
 import Express from "express";
 import path from "path";
 import ReactDOM from "react-dom/server";
+import { StaticRouter } from "react-router-dom/server";
 
 import App from "../src/App";
 
@@ -10,8 +11,12 @@ server.set("view engine", "ejs");
 server.set("views", path.join(__dirname, "..", "views"));
 server.use(Express.static(path.join(__dirname, "..", "public")));
 
-server.get("*", (_, res) => {
-    const markup = ReactDOM.renderToString(<App />)
+server.get("*", (req, res) => {
+    const markup = ReactDOM.renderToString(
+        <StaticRouter location={req.url}>
+            <App />
+        </StaticRouter>
+    )
     res.render("index", { markup });
 });
 
